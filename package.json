@@ -1,0 +1,19 @@
+{
+  "name": "caloriesapp",
+  "version": "1.0.0",
+  "description": "Webapp Calorie Count",
+  "main": "index.js",
+  "scripts": {
+    "start":"nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Calorie",
+    "webapp"
+  ],
+  "author": "Group 28",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
