@@ -21,7 +21,8 @@ module.exports.createSession = async function(req,res){
             data: {
                 token: jwt.sign(user.toJSON(), 'caloriesapp', {expiresIn: '100000'}),
                 user: user,
-            }
+            },
+            success: true,
         })
 
     }catch(err){
