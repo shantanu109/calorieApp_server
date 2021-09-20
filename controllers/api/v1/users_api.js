@@ -38,3 +38,68 @@ module.exports.createSession = async function(req,res){
 
 
 }
+
+
+module.exports.signUp = async function (req, res) {
+    try {
+      if (req.body.password != req.body.confirm_password) {
+        return res.json(422, {
+          message: "Passwords donot match",
+        });
+      }
+  
+      User.findOne({ email: req.body.email }, function (err, user) {
+        if (user) {
+          return res.json(200, {
+            message: "Sign Up Successful, here is your token, plz keep it safe",
+  
+            data: {
+              //user.JSON() part gets encrypted
+  
+              token: jwt.sign(user.toJSON(), 'caloriesapp', {
+                expiresIn: "100000",
+              }),
+              user,
+            },
+            success: true,
+          });
+        }
+  
+        if (!user) {
+          let user = User.create(req.body, function (err, user) {
+            if (err) {
+              return res.json(500, {
+                message: "Internal Server Error",
+              });
+            }
+  
+            // let userr = User.findOne({ email: req.body.email });
+  
+            return res.json(200, {
+              message: "Sign Up Successful, here is your token, plz keep it safe",
+  
+              data: {
+                //user.JSON() part gets encrypted
+  
+                token: jwt.sign(user.toJSON(), 'caloriesapp', {
+                  expiresIn: "100000",
+                }),
+                user,
+              },
+              success: true,
+            });
+          });
+        } else {
+          return res.json(500, {
+            message: "Internal Server Error",
+          });
+        }
+      });
+    } catch (err) {
+      console.log(err);
+  
+      return res.json(500, {
+        message: "Internal Server Error",
+      });
+    }
+  };
