@@ -14,7 +14,27 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    height: {
+        type: Number,
+        
+        default: 0
+    },
+    weight: {
+        type:Number,
+        default: 0
+    },
+    goal: {
+        type: String,
+        default:''
+        
+    },
+    target:{
+        type:Number,
+        default:0
     }
+
+
 }, {
     timestamps: true
 });
