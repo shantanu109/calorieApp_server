@@ -10,6 +10,7 @@ router.post('/create-session',usersApi.createSession);
 router.post('/signup', usersApi.signUp);
 router.post('/edit', usersApi.editProfile);
 router.get('/search/:name', usersApi.searchUser);
+router.post('/createhistory',usersApi.createHistory);
 
 
 module.exports = router;

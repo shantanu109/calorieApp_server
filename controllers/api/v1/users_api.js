@@ -1,6 +1,7 @@
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
 const Food = require("../../../models/food");
+const History = require('../../../models/history');
 
 
 
@@ -29,6 +30,42 @@ module.exports.createSession = async function (req, res) {
     });
   }
 };
+
+
+module.exports.createHistory = async function (req, res) {
+  try {
+  
+        let history = await History.create({
+          date: req.body.date,
+          caloriesgain: req.body.total,
+          caloriesburn: req.body.burnout,
+          user:req.body.id
+
+        });
+          
+
+          return res.json(200, {
+            message: "History Created Successfully",
+
+            data: {
+              
+              history:history,
+            },
+            success: true,
+          });
+        ;
+      }
+    
+   catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
 
 module.exports.signUp = async function (req, res) {
   try {
