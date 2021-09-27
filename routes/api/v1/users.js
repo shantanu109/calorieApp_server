@@ -11,6 +11,8 @@ router.post('/signup', usersApi.signUp);
 router.post('/edit', usersApi.editProfile);
 router.get('/search/:name', usersApi.searchUser);
 router.post('/createhistory',usersApi.createHistory);
+// router.get('/gethistory/:userId',usersApi.getHistory);
+router.get('/gethistory',usersApi.getHistory);
 
 
 module.exports = router;
