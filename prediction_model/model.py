@@ -1,18 +1,25 @@
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 from pymongo import MongoClient
+import matplotlib.pyplot as plt
 
 client = MongoClient()
 client = MongoClient('mongodb://localhost:27017')
 db = client['weight']
-df = db.usr_weight
+df = db.usr_wt
 df = pd.DataFrame(list(df.find()))
 
-date = df.iloc[:, 1]
-X = df.iloc[:, 2:-1]
-y = df.iloc[:, -1]
+X = df[['date', 'weight']]
 
-X = pd.DataFrame(X, columns=['calorie_intake', 'calorie_burn', 'surplus', 'weight', 'weight_change'])
+date = X['date'].tolist()
+wt = X['weight'].tolist()
 
-dataframe = pd.concat([date, X, y], axis=1, join='inner')
-print(dataframe)
+wt = [float(i) for i in wt]
+
+plt.figure(figsize=(10, 10))
+plt.plot(date, wt, color='red', marker='o')
+plt.xticks(rotation='vertical')
+plt.title('Date vs Weight', fontsize=18)
+plt.xlabel('Date', fontsize=18)
+plt.ylabel('Weight', fontsize=18)
+
+plt.savefig('dateVsweight.png')
