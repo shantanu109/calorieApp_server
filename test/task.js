@@ -24,14 +24,11 @@ describe('Tasks API', () => {
                 .post("/api/v1/users/create-session")
                 .send(task)
                 .end((err,response) => {
-                    // response.should.have.status('200');
+                    
                     response.body.should.be.a('object');
-                    // response.body.should.have.a('object');
-                    // response.body.should.have.property('data')
+    
                     console.log('*********',response.body)
-                    // response.body.should.have.property('success').eq(200);
-                    // response.json.success.eq(200)
-                    // response.body.should.be.a('object').should.have.property('success');
+                  
 
                 done();
 
@@ -48,14 +45,11 @@ describe('Tasks API', () => {
                 chai.request('http://localhost:8000')
                     .get("/users/search/" + task )
                     .end((err,response) => {
-                        // response.should.have.status('200');
+                        
                         response.body.should.be.a('object');
-                        // response.body.should.have.a('object');
-                        // response.body.should.have.property('data')
+                        
                         console.log('*********',response.body)
-                        // response.body.should.have.property('success').eq(200);
-                        // response.json.success.eq(200)
-                        // response.body.should.be.a('object').should.have.property('success');
+                       
     
                     done();
     
